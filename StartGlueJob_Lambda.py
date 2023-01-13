@@ -3,12 +3,12 @@ import boto3
 
 def lambda_handler(event, context):
     glue_jobs =	{
-        "stores.json": "storesjsonjob",
-        "stores.csv": "storesjob",
-        "holidays_events.csv": "holidayseventscsvjob",
-        "items.csv": "itemscsvjob",
+        "zips.json": "zipsjsonjob",
+        "us-500.csv": "us-500job",
+        "bank-full.csv": "bank-fullcsvjob",
+        "vehicle.csv": "vehiclecsvjob",
         "transactions.csv":"transactionscsvjob",
-        "events.csv":"eventscsvjob"
+        "aadhar.csv":"aadharcsvjob"
         }
         
     file_name = event['Records'][0]['s3']['object']['key']
@@ -17,21 +17,21 @@ def lambda_handler(event, context):
     print("Bucket Name : ",bucketName)
     glue=boto3.client('glue');
     
-    if file_name == "stores.json":
+    if file_name == "zips.json":
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
     
-    elif file_name == "stores.csv":
+    elif file_name == "us-500.csv":
         glue=boto3.client('glue');
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
     
-    elif file_name == "holidays_events.csv":
+    elif file_name == "bank-full.csv":
         glue=boto3.client('glue');
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
         
-    elif file_name == "items.csv":
+    elif file_name == "vehicle.csv":
         glue=boto3.client('glue');
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
     
-    elif file_name == "events.csv":
+    elif file_name == "aadhar.csv":
         glue=boto3.client('glue');
         response = glue.start_job_run(JobName = glue_jobs[file_name])
         print("Run {}".format(glue_jobs[file_name]))
